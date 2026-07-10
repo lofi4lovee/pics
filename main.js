@@ -200,9 +200,6 @@ function renderPreview() {
         renderTarget.innerHTML = `
             <div id="tpl5-bg" class="w-full h-full relative overflow-hidden flex flex-col justify-center items-center" style="background-color: #000000;">
                 <div id="preview-text-container" class="w-[95%] z-20 flex flex-row justify-center items-center relative">
-                    <!-- Thick Vertical Line -->
-                    <div id="tpl5-line" class="mr-8" style="width: 16px; height: 220px; background-color: #ff0000; border-radius: 8px;"></div>
-                    
                     <!-- Text Block -->
                     <div id="preview-text" class="flex flex-col items-start font-['Noto_Sans_Devanagari'] font-bold text-left leading-tight">
                         <!-- Line 1 -->
@@ -774,17 +771,6 @@ function renderDynamicInputs() {
                 </label>
             </div>
 
-            <!-- Thick Line -->
-            <div class="mt-4">
-                <label class="block text-sm font-medium text-gray-700 mb-1">Thick Line Color</label>
-                <label for="input-tpl5-line-color" class="flex items-center gap-3 p-2 border border-gray-300 rounded-lg bg-white shadow-sm focus-within:ring-2 focus-within:ring-blue-500 transition-all cursor-pointer hover:bg-gray-50">
-                    <div class="relative w-8 h-8 rounded-md overflow-hidden border border-gray-200 shadow-inner flex-shrink-0 cursor-pointer">
-                        <input type="color" id="input-tpl5-line-color" value="#ff0000" class="absolute -top-2 -left-2 w-12 h-12 cursor-pointer border-0 p-0">
-                    </div>
-                    <span class="text-sm font-medium text-gray-600 uppercase tracking-wide pointer-events-none">Pick Color</span>
-                </label>
-            </div>
-
             <hr class="my-6 border-gray-200">
             
             <!-- Global Font and Adjustments -->
@@ -820,12 +806,11 @@ function renderDynamicInputs() {
             document.getElementById('tpl5-line2').style.color = e.target.value;
         });
 
-        document.getElementById('input-tpl5-line-color').addEventListener('input', (e) => {
-            document.getElementById('tpl5-line').style.backgroundColor = e.target.value;
-        });
-
         document.getElementById('input-text-size-tpl5').addEventListener('input', (e) => {
-            document.getElementById('preview-text').style.transform = `scale(${e.target.value})`;
+            const newSize = e.target.value * 90;
+            document.getElementById('tpl5-line1').style.fontSize = `${newSize}px`;
+            document.getElementById('tpl5-line2').style.fontSize = `${newSize}px`;
+            document.getElementById('preview-text-container').style.transform = 'none';
         });
         
     } else if (currentTemplateId === 1) {
@@ -1084,4 +1069,4 @@ renderDynamicInputs = function() {
             previewText.style.fontFamily = currentFont;
         }
     }
-};
+};  
